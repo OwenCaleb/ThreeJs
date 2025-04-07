@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>太阳系模拟器</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+        
+        canvas {
+            display: block;
+        }
+        
+        #info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            pointer-events: none;
+        }
+        
+        #planet-info {
+            margin-top: 10px;
+            display: none;
+        }
+        
+        #planet-info.visible {
+            display: block;
+        }
+        
+        #controls {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        #speed-control {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        #speed-control label {
+            margin-right: 10px;
+        }
+        
+        #speed-slider {
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+        
+        #speed-value {
+            width: 40px;
+            text-align: center;
+        }
+        
+        button {
+            background-color: #333;
+            color: #fff;
+            border: 1px solid #555;
+            padding: 5px 10px;
+            margin: 0 5px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #444;
+        }
+        
+        button.active {
+            background-color: #555;
+        }
+        
+        .planet-data {
+            margin-top: 5px;
+        }
+        
+        .planet-data span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="info">
+        <h2>太阳系模拟器</h2>
+        <p>使用鼠标滚轮缩放，按住左键旋转视角，点击天体查看详细信息</p>
+        <div id="planet-info">
+            <h3 id="planet-name"></h3>
+            <div class="planet-data">直径: <span id="planet-radius"></span> 千米</div>
+            <div class="planet-data">距离太阳: <span id="planet-distance"></span> 百万千米</div>
+            <div class="planet-data">公转周期: <span id="planet-orbital"></span> 地球年</div>
+            <div class="planet-data">自转周期: <span id="planet-rotation"></span> 地球日</div>
+        </div>
+    </div>
+    
+    <div id="controls">
+        <div id="speed-control">
+            <label for="speed-slider">模拟速度:</label>
+            <input type="range" id="speed-slider" min="0" max="0.5" step="0.01" value="0.1">
+            <span id="speed-value">1x</span>
+        </div>
+        <button id="toggle-play">暂停</button>
+        <button id="toggle-orbits">显示/隐藏轨道</button>
+        <button id="reset-camera">重置视角</button>
+    </div>
+    
+    <!-- 使用importmap定义模块映射 -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.159.0/build/three.module.js",
+            "three/examples/jsm/controls/OrbitControls": "https://unpkg.com/three@0.159.0/examples/jsm/controls/OrbitControls.js"
+        }
+    }
+    </script>
+    
+    <!-- 引入Three.js库和OrbitControls -->
+    <script type="module" src="js/app.js"></script>
+</body>
+</html> 
